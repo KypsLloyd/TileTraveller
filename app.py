@@ -1,5 +1,5 @@
-def possible_directions(north, east, south, west):
-
+# Fall sem prentar út allar mögulegar leiðir
+def possible_directions(north, east, south, west): 
     first = False
     print("You can travel: ", end="")
     if north:
@@ -20,16 +20,10 @@ def possible_directions(north, east, south, west):
             print(" or ", end="")
         print("(W)est", end="")
         first = True
-    
     print(".")
-    
 
-position = "1,1"
-
-possible_directions(True, False, False, False)
-next_input = input("Direction: ")
-
-while position != "3,1":
+# Fall færir leikmann
+def move(next_input, position): 
     if position == "1,1":
         if next_input.upper() == "N":
             position = "1,2"
@@ -96,10 +90,22 @@ while position != "3,1":
             possible_directions(False, False, True, True)
         elif next_input.upper() == "S":
             position = "3,1"
-            continue
+            return position
         else:
             print("Not a valid direction!")
+    return position
+    
 
-    next_input = input("Direction: ")
+position = "1,1"
+
+possible_directions(True, False, False, False)
+next_input = input("Direction: ")
+
+while position != "3,1":
+    position = move(next_input, position)
+
+    if position != "3,1":
+        next_input = input("Direction: ")
+
 else:
     print("Victory!")
