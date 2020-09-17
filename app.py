@@ -90,7 +90,7 @@ def move(next_input, position):
             possible_directions(False, False, True, True)
         elif next_input.upper() == "S":
             position = "3,1"
-            return position
+            print("Victory!")
         else:
             print("Not a valid direction!")
     return position
@@ -101,11 +101,10 @@ position = "1,1"
 possible_directions(True, False, False, False)
 next_input = input("Direction: ")
 
-while position != "3,1":
+while True:
     position = move(next_input, position)
 
     if position != "3,1":
         next_input = input("Direction: ")
-
-else:
-    print("Victory!")
+    else:
+        break
