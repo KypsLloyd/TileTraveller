@@ -22,10 +22,18 @@ def possible_directions(north, east, south, west):
         first = True
     print(".")
 
+def pull_lever(levers_pulled, position):
+    if position not in levers_pulled:
+        choice = input("Pull a lever (y/n): ")
+        if choice.lower() == 'y':
+            levers_pulled.append(position)
+            print(f"You received 1 coin, your total is now {len(levers_pulled)}.")
+
 # Fall færir leikmann
-def move(next_input, position): 
+def move(next_input, position, levers_pulled): 
     if position == "1,1":
         if next_input.upper() == "N":
+            pull_lever(levers_pulled, position)
             position = "1,2"
             possible_directions(True, True, True, False)
         else:
@@ -33,6 +41,7 @@ def move(next_input, position):
             possible_directions(True, False, False, False)
     elif position == "1,2":
         if next_input.upper() == "E":
+            pull_lever(levers_pulled, position)
             position = "2,2"
             possible_directions(False, False, True, True)
         elif next_input.upper() == "N":
@@ -46,6 +55,7 @@ def move(next_input, position):
             possible_directions(True, True, True, False)
     elif position == "2,2":
         if next_input.upper() == "W":
+            pull_lever(levers_pulled, position)
             position = "1,2"
             possible_directions(True, True, True, False)
         elif next_input.upper() == "S":
@@ -56,6 +66,7 @@ def move(next_input, position):
             possible_directions(False, False, True, True)
     elif position == "2,1":
         if next_input.upper() == "N":
+            pull_lever(levers_pulled, position)
             position = "2,2"
             possible_directions(False, False, True, True)
         else:
@@ -63,9 +74,11 @@ def move(next_input, position):
             possible_directions(True, False, False, False)
     elif position == "1,3":
         if next_input.upper() == "E":
+            pull_lever(levers_pulled, position)
             position = "2,3"
             possible_directions(False, True, False, True)
         elif next_input.upper() == "S":
+            pull_lever(levers_pulled, position)
             position = "1,2"
             possible_directions(True, True, True, False)
         else:
@@ -83,9 +96,11 @@ def move(next_input, position):
             possible_directions(False, True, False, True)
     elif position == "3,3":
         if next_input.upper() == "S":
+            pull_lever(levers_pulled, position)
             position = "3,2"
             possible_directions(True, False, True, False)
         elif next_input.upper() == "W":
+            pull_lever(levers_pulled, position)
             position = "2,3"
             possible_directions(False, True, False, True)
         else:
@@ -97,22 +112,20 @@ def move(next_input, position):
             possible_directions(False, False, True, True)
         elif next_input.upper() == "S":
             position = "3,1"
-            print("Victory!")
+            print(f"Victory! Total coins {len(levers_pulled)}.")
         else:
             print("Not a valid direction!")
             possible_directions(True, False, True, False)
-    return position
+    return position, levers_pulled
     
 
 position = "1,1"
 
 possible_directions(True, False, False, False)
-next_input = input("Direction: ")
 
-while True:
-    position = move(next_input, position)
+levers_pulled = []
 
-    if position != "3,1":
-        next_input = input("Direction: ")
-    else:
-        break
+while position != "3,1":
+    next_input = input("Direction: ")
+
+    position, levers_pulled = move(next_input, position, levers_pulled)
