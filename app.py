@@ -93,11 +93,21 @@ def move(next_input, position, coins):
     elif position == [3,3]:
         position, coins = valid_move(next_input, coins, position, ["S","W"])
     return position, coins
-    
-position = [1,1]
-coins = 0
-valid_dir_print(position)
 
-while position != [3,1]:
-    next_input = input("Direction: ")
-    position, coins = move(next_input, position, coins)
+def play():
+    position = [1,1]
+    coins = 0
+    valid_dir_print(position)
+
+    while position != [3,1]:
+        next_input = input("Direction: ")
+        position, coins = move(next_input, position, coins)
+
+def main():
+    play_again = "y"
+    while play_again.lower() == "y":
+        play()
+        play_again = input("Play again (y/n): ")
+
+
+main()
