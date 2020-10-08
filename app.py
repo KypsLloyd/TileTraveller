@@ -121,6 +121,7 @@ def move(next_input, position, levers_pulled, choice_lever):
     
 
 def play():
+<<<<<<< HEAD
     list_of_choice = ["N", "E", "s", "W"]
     lever_choices = ["y", "n"]
     choice_lever = int(input("Input seed: "))
@@ -142,4 +143,20 @@ def main():
         play_again = input("Play again (y/n): ")
 
 
+=======
+    position = "1,1"
+    possible_directions(True, False, False, False)
+    levers_pulled = []
+    while position != "3,1":
+        next_input = input("Direction: ")
+        position, levers_pulled = move(next_input, position, levers_pulled)
+
+def main():
+    play_again = "y"
+    while play_again.lower() == "y":
+        play()
+        play_again = input("Play again (y/n): ")
+
+
+>>>>>>> aafee83fc8284da6775adbd302004cdaef525550
 main()
