@@ -119,13 +119,19 @@ def move(next_input, position, levers_pulled):
     return position, levers_pulled
     
 
-position = "1,1"
+def play():
+    position = "1,1"
+    possible_directions(True, False, False, False)
+    levers_pulled = []
+    while position != "3,1":
+        next_input = input("Direction: ")
+        position, levers_pulled = move(next_input, position, levers_pulled)
 
-possible_directions(True, False, False, False)
+def main():
+    play_again = "y"
+    while play_again.lower() == "y":
+        play()
+        play_again = input("Play again (y/n): ")
 
-levers_pulled = []
 
-while position != "3,1":
-    next_input = input("Direction: ")
-
-    position, levers_pulled = move(next_input, position, levers_pulled)
+main()
